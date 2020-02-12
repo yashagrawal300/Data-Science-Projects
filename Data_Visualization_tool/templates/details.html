@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+</head>
+<body bgcolor="black" align="center">
+<font color="white" align="center">
+    <h1>
+        <center>{{ name }}</center>
+    </h1>
+    <br><br><br>
+
+
+
+<h3>Top 5 rows of dataset</h3><br>
+<table border="3" cellspacing="2" cellpadding="3" align="center">
+    <tr>
+        {% for i in df.columns%}
+        <td bgcolor="red">{{ i }}</td>
+        {% endfor %}
+    </tr>
+    {% for i in range(0, 5, 1) %}
+    <tr>
+        {% for j in range(0, df.shape[1], 1) %}
+        <td>{{ df.iat[i,j] }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+    <br><br><br><br><br>
+    <h3>Description</h3>
+    <br>
+<table border = '1' cellspacing="2" cellpadding="1" align="center">
+    <tr>
+        <td></td>
+        {% for i in df.columns%}
+        <td bgcolor="red">{{ i }}</td>
+        {% endfor %}
+    </tr>
+
+    {% for i in range(8) %}
+    <tr>
+    <td bgcolor="red">{{ describe[i] }}</td>
+        {% for j in range(0, df.shape[1], 1) %}
+        <td>{{ df.describe(include = "all").iat[i, j] }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+    <br><br><br><br><br>
+
+    <h3>Null Values</h3>
+    <br>
+<table align="center" border = '1' cellspacing="2" cellpadding="1">
+    {% for i in range(0, df.shape[1], 1)%}
+    <tr>
+        <td bgcolor="red">{{ df.columns[i]  }}</td>
+        <td>{{ df.isnull().sum()[i] }}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br><br><br><br><br>
+
+    <form>
+        <a href="{{ url_for('fixvalues') }}"><button type="button">
+            FixNull
+        </button></a>&nbsp;&nbsp;
+&nbsp;
+        <a href="{{ url_for('visualize') }}">
+            <button type="button">
+                Visualize
+            </button>
+        </a>
+    </form>
+
+
+
+
+</font>
+</body>
+</html>

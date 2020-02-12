@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualization</title>
+</head>
+<body bgcolor="black">
+<font color="white">
+    <center>
+<h1>{{ name }}</h1>
+    <br><br>
+        <h2>Visualization</h2>
+        <br><br>
+        {{ col1, col2, palette, theme }}
+        <form action="{{ url_for('yash') }}" method="POST">
+        <select name="theme">
+            <option>light</option>
+            <option>dark</option>
+        </select>
+
+            <select name="graph">
+                <option>lineplot</option>
+                <option>barplot</option>
+                <option>boxplot</option>
+                <option>scatterplot</option>
+                <option>swarmplot</option>
+            </select>
+            &nbsp;
+
+
+            <select name = "col1">
+                {% for i in df.columns %}
+                <option>{{i}}</option>
+                {% endfor %}
+            </select>
+
+
+
+            <select name = "col2">
+                {%for i in df.columns%}
+                <option>{{ i }}</option>
+                {% endfor %}
+            </select>
+
+
+
+
+            <select name = "palette">
+                <option>winter</option>
+                <option>summer</option>
+                <option>twilight</option>
+                <option>autumn</option>
+                <option>prism</option>
+                <option>rainbow</option>
+                <option>hot</option>
+            </select>
+            <br>
+            <br>
+
+            <br><br><br>
+            <input type="submit">
+        </form>
+        <img src="{{ url_for('static', filename = image) }}" />
+        </center>
+</font>
+
+
+
+
+
+
+
+
+## This code produces the image
+## I was checking whether my sever is reading the drop down list or not
+## must be added once i clear the line 67 of this file.
+
+
+    if request.form.get('theme')=="dark":
+        plt.style.use('dark_background')
+        if plot=='barplot':
+            sns_plot = sns.barplot(x = col1, y = col2, data = df, palette = palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot=='lineplot':
+            sns_plot = sns.lineplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'boxplot':
+            sns_plot = sns.boxplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'scatterplot':
+            sns_plot = sns.scatterplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'swarmplot':
+            sns_plot = sns.swarmplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+    else:
+        if plot == 'barplot':
+            sns_plot = sns.barplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'lineplot':
+            sns_plot = sns.lineplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'boxplot':
+            sns_plot = sns.boxplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'scatterplot':
+            sns_plot = sns.scatterplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+        elif plot == 'swarmplot':
+            sns_plot = sns.swarmplot(x=col1, y=col2, data=df, palette=palette)
+            sns_plot = sns_plot.get_figure()
+            sns_plot.savefig('static/hist.png')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

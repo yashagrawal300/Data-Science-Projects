@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fixing Values</title>
+</head>
+<body bgcolor="black">
+<font color="white">
+<center>
+    <h1>{{ name }}</h1>
+    <br><br>
+    <h2>Null Values</h2>
+    <br>
+<table align="center" border = '1' cellspacing="2" cellpadding="1">
+    {% if nofix==0 %}
+        <h1>No Fixing required</h1>
+        <br><br>
+    <h3><a href="{{ url_for('details') }}">Go back</a></h3>
+    {% else %}
+
+    <tr>
+        {% for i in null %}
+        <td bgcolor="red"> {{ df.columns[i] }} </td>
+        {% endfor %}
+    </tr>
+    {% for i in range(0, 5, 1) %}
+    <tr>
+        {% for j in null %}
+        <td>{{ df.iat[i,j] }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+    <br><br><br>
+    <form action="{{ url_for('afterfix') }}" method="POST">
+        Column to Fix:
+        <select name="cols">
+            {% for i in null %}
+            <option>{{ df.columns[i] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+          <select name="meth">
+            <option>Drop Column</option>
+            <option>Mean</option>
+            <option>Std deviation</option>
+            <option>Add upper value</option>
+            <option>Adder lower value</option>
+        </select>
+        <input type="submit">
+    </form>
+
+
+</center>
+</font>
+   {% endif %}
+</body>
+</html>

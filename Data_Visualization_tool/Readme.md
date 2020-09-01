@@ -1,4 +1,1 @@
-<h1>Work in progress</h1>
-
-
-The issue that I am facing is that it is not able to save and read the image correctly 
+Just need to change the name of the images that are generating to fix the issue of colliding same images.
